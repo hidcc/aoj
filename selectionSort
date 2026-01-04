@@ -1,0 +1,45 @@
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+#define PI 3.141592653589793
+#include <math.h>
+#include <time.h>
+#define ll long long int
+#include <stdbool.h>
+ll selectionSort(ll *A,ll N);
+int main(){
+    ll N,i,j;
+    scanf("%lld",&N);
+    ll A[N];
+    for(i=0;i<N;i++){
+        scanf("%lld",&A[i]);
+    }
+    ll count =selectionSort(A,N);
+    for(i=0;i<N;i++){
+        if(i!=0) printf(" ");
+        printf("%lld",A[i]);
+    }
+    printf("\n");
+    printf("%lld\n",count);
+
+    return 0;
+}
+ll selectionSort(ll *A,ll N){
+    ll count =0;
+    for(ll i=0;i<N;i++){
+        ll minj =i;
+        for(ll j=i;j<N;j++){
+            if(A[j]<A[minj])
+                minj = j;
+        }
+        if(minj!=i){
+             ll tmp = A[i];
+            A[i] = A[minj];
+            A[minj] = tmp;
+            count++;
+        }
+    }
+    return count;
+}
