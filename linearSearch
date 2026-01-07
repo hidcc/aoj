@@ -1,0 +1,43 @@
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+#define PI 3.141592653589793
+#include <math.h>
+#include <time.h>
+#define ll long long int
+#include <stdbool.h>
+
+ll linearSearch(ll S[],ll n,ll key);
+
+int main(){
+    ll c,n,i,j,key;
+    scanf("%lld",&n);
+    ll S[n+1];
+    ll count =0;
+    for(i=0;i<n;i++){
+        scanf("%lld",&S[i]);
+    }
+    scanf("%lld",&c);
+    for(i=0;i<c;i++){
+        scanf("%lld",&key);
+        count += linearSearch(S,n,key);
+    }
+    printf("%lld\n",count);
+
+    return 0;
+}
+
+ll linearSearch(ll S[],ll n,ll key){
+    ll i=0;
+    S[n] = key;
+    while(S[i]!=key){
+        i++;
+    }
+    if(i==n){
+        return 0;
+    }else{
+        return 1;
+    }
+}
