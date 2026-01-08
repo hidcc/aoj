@@ -1,0 +1,49 @@
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+#define PI 3.141592653589793
+#include <math.h>
+#include <time.h>
+#define ll long long int
+#include <stdbool.h>
+typedef struct{
+    double x,y;
+} Point;
+
+void koch(int n,Point a,Point b);
+int main(){
+    int n,x,y;
+    Point a,b;
+    scanf("%d",&n);
+    a.x = 0;
+    a.y = 0;
+    b.x = 100;
+    b.y = 0;
+
+    printf("%.8f %.8f\n",a.x,a.y);
+    koch(n,a,b);
+    printf("%.8f %.8f\n",b.x,b.y);
+
+    return 0;
+}
+
+void koch(int n,Point a,Point b){
+    if(n==0) return;
+    double th = PI*60.0/180.0;
+    Point s,t,u;
+    s.x = (2.0*a.x+1.0*b.x) /3.0;
+    s.y = (2.0*a.y+1.0*b.y) /3.0;
+    t.x = (1.0*a.x+2.0*b.x) /3.0;
+    t.y = (1.0*a.y+2.0*b.y) /3.0;
+    u.x = (t.x-s.x)*cos(th)-(t.y-s.y)*sin(th) + s.x;
+    u.y = (t.x-s.x)*sin(th)+(t.y-s.y)*cos(th) + s.y;
+    koch(n-1,a,s);
+    printf("%.8f %.8f\n",s.x,s.y);
+    koch(n-1,s,u);
+    printf("%.8f %.8f\n",u.x,u.y);
+    koch(n-1,u,t);
+    printf("%.8f %.8f\n",t.x,t.y);
+    koch(n-1,t,b);
+}
