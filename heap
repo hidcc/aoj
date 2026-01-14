@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define ll long long int
+#define MAX 2000000
+ll A[MAX],H;
+
+void maxHeapify(ll i);
+
+int main(){
+    ll i;
+    scanf("%lld",&H);
+    for(i=1;i<=H;i++){
+        scanf("%lld",&A[i]);
+    }
+    for(i=H/2;i>=1;i--) maxHeapify(i);
+    for(i=1;i<=H;i++){
+        printf(" %lld",A[i]);
+    }
+    printf("\n");
+    return 0;
+}
+
+void maxHeapify(ll i){
+    ll l,r,largest;
+    l = 2*i;
+    r = 2*i+1;
+    if(l<=H&&A[l]>A[i]) largest = l;
+    else largest = i;
+    if(r<=H&&A[r]>A[largest]) largest = r;
+    if(largest!=i){
+        ll tmp = A[i];
+        A[i]=A[largest];
+        A[largest] = tmp;
+        maxHeapify(largest);
+    }
+}
