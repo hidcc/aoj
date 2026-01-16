@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define ll long long int
+
+ll dp[50];
+
+ll fib(ll n){
+    if(n==0||n==1) return dp[n]=1;
+    if(dp[n]!=-1) return dp[n];
+    return dp[n]=fib(n-1)+fib(n-2);
+}
+int main(){
+    ll n,i;
+    for(i=0;i<50;i++) dp[i] = -1;
+    scanf("%lld",&n);
+    printf("%lld\n",fib(n));
+    return 0;
+}
