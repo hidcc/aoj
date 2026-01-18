@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define ll long long int
+
+ll M[101][101];
+
+int main(){
+    ll n,v,k,u,i,j;
+    scanf("%lld",&n);
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            M[i][j]=0;
+        }
+    }
+    for(i=0;i<n;i++){
+        scanf("%lld %lld",&u,&k);
+        u--;
+        for(j=0;j<k;j++){
+            scanf("%lld",&v);
+            v--;
+            M[u][v]=1;
+        }
+    }
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            if(j) printf(" ");
+            printf("%lld",M[i][j]);
+        }
+        printf("\n");
+    }
+}
