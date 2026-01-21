@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <string.h>
+#define ll long long int
+#define N 101
+#define INFTY (1<<21)
+#define white 0
+#define gray 1
+#define black 2
+ll n;
+ll M[N][N];
+ll prim();
+
+int main(){
+    ll i,j;
+    scanf("%lld",&n);
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            ll e;
+            scanf("%lld",&e);
+            M[i][j]=(e==-1)?INFTY:e;
+        }
+    }
+    printf("%lld\n",prim());
+    return 0;
+}
+ll prim(){
+    ll u,minv,i,j;
+    ll d[N],color[N],p[N];
+    for(u=0;u<n;u++){
+        color[u]=white;
+        d[u]=INFTY;
+        p[u]=-1;
+    }
+    d[0]=0;
+    while(1){
+        minv=INFTY;
+        u=-1;
+        for(i=0;i<n;i++){
+            if(color[i]!=black&&d[i]<minv){
+                minv=d[i];
+                u=i;
+            }
+        }
+        if(u==-1) break;
+        color[u]=black;
+        for(ll v=0;v<n;v++){
+            if(color[v]!=black&&M[u][v]!=INFTY){
+                if(d[v]>M[u][v]){
+                    d[v]=M[u][v];
+                    p[v]=u;
+                    color[v]=gray;
+                }
+            }
+        }
+    }
+    ll sum=0;
+    for(i=0;i<n;i++){
+        if(p[i]!=-1)sum+=M[i][p[i]];
+    }
+    return sum;
+}

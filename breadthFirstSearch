@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <string.h>
+#define ll long long int
+#define N 101
+#define INFTY (1<<21)
+#define white 0
+#define gray 1
+#define black 2
+ll color[N],d[N],f[N],n;
+ll tt,head,tail;
+ll M[N][N];
+ll q[N];
+void enqueue(ll s);
+ll dequeue();
+ll isEmpty();
+void bfs(ll s){
+    for(ll i=0;i<n;i++)d[i]=INFTY;
+    d[s]=0;
+    enqueue(s);
+    while(!isEmpty()){
+        ll u = dequeue();
+        for(ll v=0;v<n;v++){
+            if(M[u][v]==0)continue;
+            if(d[v]!=INFTY)continue;
+            d[v]=d[u]+1;
+            enqueue(v);
+        }
+    }
+    for(ll i =0;i<n;i++){
+        if(d[i]==INFTY) printf("%lld -1\n",i+1);
+        else printf("%lld %lld\n",i+1,d[i]);
+    }
+}
+int main(){
+    ll i,j,v,k,u;
+    scanf("%lld",&n);
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            M[i][j]=0;
+        }
+    }
+    for(i=0;i<n;i++){
+      scanf("%lld %lld",&u,&k);
+        u--;
+        for(j=0;j<k;j++){
+            scanf("%lld",&v);
+            v--;
+            M[u][v]=1;
+        }
+    }
+    tail=head=0;
+    bfs(0);
+    return 0;
+}
+void enqueue(ll s){
+    q[tail]=s;
+    tail = (tail+1)%N;
+}
+ll dequeue(){
+    ll s = q[head];
+    head=(head+1)%N;
+    return s;
+}
+ll isEmpty(){
+    return head==tail;
+}
